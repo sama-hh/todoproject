@@ -68,6 +68,7 @@ class ToDoControllerTest {
     }
 
     @Test
+    @DirtiesContext
     void getToDoDetails() throws Exception {
         ToDo todo = new ToDo("1", "make smth", Status.OPEN);
         toDoRepository.save(todo);
