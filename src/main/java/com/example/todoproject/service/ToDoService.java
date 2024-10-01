@@ -41,4 +41,13 @@ public class ToDoService {
         return toDoRepository.save(updatedToDo);
     }
 
+    public void deleteToDo(String id) {
+        Optional<ToDo> todo = toDoRepository.findById(id);
+        if (todo.isPresent()) {
+            toDoRepository.deleteById(id);
+        } else {
+            throw new NoSuchElementException("ToDo with id " + id + " not found");
+        }
+    }
+
 }

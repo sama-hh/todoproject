@@ -2,6 +2,6 @@ package com.example.todoproject.model;
 
 public enum Status {
     OPEN,
-    DOING,
+    IN_PROGRESS,
     DONE
 }

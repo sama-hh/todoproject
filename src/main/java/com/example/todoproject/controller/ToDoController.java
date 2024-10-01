@@ -11,30 +11,34 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/todo")
 public class ToDoController {
 
     private final ToDoService toDoService;
 
-    @GetMapping("/todo")
+    @GetMapping
     public List<ToDo> getTodos() {
         return toDoService.getAllTodos();
     }
 
-    @PostMapping("/todo")
+    @PostMapping
     public ToDo save(@RequestBody CreateToDoRequest request) {
         ToDo newToDo = toDoService.createToDo(request.toModel());
         return newToDo;
     }
 
-    @GetMapping("/todo/{id}")
+    @GetMapping("/{id}")
     public ToDo getToDoDetails(@PathVariable String id) {
         return toDoService.getToDoDetails(id);
     }
 
-    @PutMapping("/todo/{id}")
+    @PutMapping("/{id}")
     public ToDo updateToDo(@PathVariable String id, @RequestBody UpdateToDoRequest request) {
         return toDoService.updateToDo(id, request);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteToDo(@PathVariable String id) {
+        toDoService.deleteToDo(id);
+    }
 }
