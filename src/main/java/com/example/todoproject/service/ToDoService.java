@@ -15,6 +15,7 @@ import java.util.Optional;
 public class ToDoService {
     private final ToDoRepository toDoRepository;
     private final IdService Idservice;
+    private final TextCorrectionService textCorrectionService;
 
     public List<ToDo> getAllTodos() {
         return toDoRepository.findAll();
@@ -23,7 +24,9 @@ public class ToDoService {
     public ToDo createToDo(ToDo todo) {
         String generatedId = Idservice.randomId();
 
-        ToDo newToDo = new ToDo(generatedId, todo.description(), todo.status());
+        String correctedDescription = textCorrectionService.correctText(todo.description());
+
+        ToDo newToDo = new ToDo(generatedId, correctedDescription, todo.status());
         return toDoRepository.save(newToDo);
     }
 
